@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* .img1{
+  
+  width: 900px;
+  height: 500px;
+  float: left; 
+}
+*/
+h1 {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#nextBtn:hover {
+  transform: scale(1.2);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+#prevBtn:hover {
+  transform: scale(1.2);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
