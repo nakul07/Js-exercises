@@ -5,14 +5,13 @@ function getBalls(noOfBalls) {
 
   // for (let i = 0; i <= noOfBalls; i++)
   while (newBall.length < noOfBalls) {
-    let balls = {
-      randomColor:
-        possilbeColors[Math.floor(Math.random() * possilbeColors.length)],
+     balls = {};
+      balls.randomColor = possilbeColors[Math.floor(Math.random() * possilbeColors.length)];
 
-      randomRadius: 20,
-      randomX: Math.floor((900 - 20) * Math.random() + 20), //(max-min)+min max= width
-      randomY: Math.floor((400 - 20) * Math.random() + 20),
-    };
+      balls.randomRadius= 40;
+      balls.randomX= Math.floor((1350 - balls.randomRadius) * Math.random() + balls.randomRadius); //(max-min)+min max= width
+      balls.randomY= Math.floor((600 - balls.randomRadius) * Math.random() + balls.randomRadius);
+    // };
     // console.log(balls.randomRadius);
     // console.log(balls.randomX);
 
