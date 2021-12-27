@@ -13,7 +13,7 @@ const possilbeColors = [
 ];
 
 function startAnimation() {
-  finalBalls = getBalls(100);
+  finalBalls = getBalls(Math.floor((200 - 5) * Math.random() + 5));
   animationArea.start();
 }
 
