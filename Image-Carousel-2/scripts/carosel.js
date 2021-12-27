@@ -30,8 +30,10 @@ class Carousel {
     this.imagesLayout();
     this.nextBtnLayout();
     this.prevBtnLayout();
+    this.media2();
     this.dotWrapperLayout();
     this.dotCreator();
+    this.media3();
     this.activeDot(this.currentIndex);
 
     this.automaticSlider();
@@ -104,7 +106,24 @@ class Carousel {
     this.prevBtnWrapper.append(this.prevBtn);
     this.prevBtn.style.backgroundColor = `rgba(255, 255, 255, 0.2)`;
     this.prevBtn.addEventListener("click", this.prevImage);
-    
+  };
+  media2 = () => {
+    if (this.tablet.matches) {
+      this.nextBtnWrapper.style.top = this.imageHeight / 2 - 25 + "px";
+      this.prevBtnWrapper.style.top = this.imageHeight / 2 - 25 + "px";
+      this.nextBtn.style.width = "40px";
+      this.nextBtn.style.height = "40px";
+      this.prevBtn.style.width = "40px";
+      this.prevBtn.style.height = "40px";
+    }
+    if (this.phone.matches) {
+      this.nextBtnWrapper.style.top = this.imageHeight / 2 - 20 + "px";
+      this.prevBtnWrapper.style.top = this.imageHeight / 2 - 20 + "px";
+      this.nextBtn.style.width = "30px";
+      this.nextBtn.style.height = "30px";
+      this.prevBtn.style.width = "30px";
+      this.prevBtn.style.height = "30px";
+    }
   };
 
   nextImage = () => {
@@ -183,7 +202,12 @@ class Carousel {
     this.dotWrapper.style.top = this.imageHeight - 20 + "px";
     this.container.append(this.dotWrapper);
   };
-
+  media3 = () => {
+    if (this.phone.matches) {
+      this.dotWrapper.style.left =
+        this.imageWidth / 2 - (this.imageCount * 15) / 2 + "px";
+    }
+  };
   dotCreator = () => {
     for (let i = 0; i < this.imageCount; i++) {
       this.dotIndicator = document.createElement("div");
@@ -196,6 +220,10 @@ class Carousel {
       this.dotIndicator.style.cursor = "pointer";
       this.dotIndicator.style.backgroundColor = "red";
       this.dotWrapper.append(this.dotIndicator);
+      if (this.phone.matches) {
+        this.dotIndicator.style.height = "10px";
+        this.dotIndicator.style.width = "10px";
+      }
       this.dotIndicator.addEventListener("click", () => {
         let currentDot = i;
         let toBeChanged = this.currentIndex - currentDot;
