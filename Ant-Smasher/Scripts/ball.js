@@ -6,12 +6,10 @@ function ball(x, y, r, color) {
   this.dx = Math.random() > 0.5 ? 1 : -1;
   this.dy = Math.random() > 0.5 ? 1 : -1;
   this.speed = 1.5;
+  this.img = document.createElement("img");
+  this.img.src = "images/ant.gif";
   this.update = function () {
     ctx = animationArea.context;
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
-    ctx.stroke();
-    ctx.fill();
-  }; 
+    ctx.drawImage(this.img, this.x, this.y, 50, 50);
+  };
 }

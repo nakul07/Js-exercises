@@ -13,7 +13,7 @@ const possilbeColors = [
 ];
 
 function startAnimation() {
-  finalBalls = getBalls(10);
+  finalBalls = getBalls(20);
   animationArea.start();
 }
 
@@ -34,7 +34,6 @@ var animationArea = {
 function updateAnimationArea() {
   animationArea.clear();
   finalBalls.forEach((ball) => {
-    
     wallCollisionDetect(ball);
     collisionDetect(ball);
     ball.update();

@@ -7,7 +7,7 @@ function ball(x, y, r, color) {
   this.color = color;
   this.dx = Math.random() > 0.5 ? 1 : -1;
   this.dy = Math.random() > 0.5 ? 1 : -1;
-  this.speed = 1.5;
+  this.speed = 1.2;
   this.update = function () {
     ctx = animationArea.context;
     ctx.fillStyle = color;
