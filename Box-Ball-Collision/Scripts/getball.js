@@ -8,9 +8,9 @@ function getBalls(noOfBalls) {
     let balls = {
       randomColor:
         possilbeColors[Math.floor(Math.random() * possilbeColors.length)],
-      randomRadius: 1 + Math.floor(Math.random() * 60),
-      randomX: 900 * Math.random(),
-      randomY: 500 * Math.random(),
+      randomRadius: 1 + Math.floor(Math.random() * 40),
+      randomX: Math.floor(900 * Math.random()),
+      randomY: Math.floor(500 * Math.random()),
     };
 
     var overlapping = false;

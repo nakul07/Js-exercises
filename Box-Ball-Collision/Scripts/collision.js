@@ -6,12 +6,14 @@ function collisionDetect(ball) {
       var dy1 = ball.y + ball.r - (otherBall.y + otherBall.r);
       var distance = Math.sqrt(dx1 * dx1 + dy1 * dy1);
   
-      if (distance <= ball.r + otherBall.r) {
+      if (distance < ball.r + otherBall.r) {
         //collision
         ball.dx = -ball.dx;
         ball.dy = -ball.dy;
         otherBall.dx = -otherBall.dx;
         otherBall.dy = -otherBall.dy;
+        ball.color = possilbeColors[i];
+        otherBall.color = possilbeColors[i];
       }
     }
   }
@@ -32,5 +34,6 @@ function collisionDetect(ball) {
   
     ball.x += ball.dx;
     ball.y += ball.dy;
+    ball.color = possilbeColors[Math.floor(Math.random() * possilbeColors.length)];
   }
   
