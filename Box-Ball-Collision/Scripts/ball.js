@@ -1,3 +1,5 @@
+//ball class
+
 function ball(x, y, r, color) {
   this.x = x;
   this.y = y;
@@ -13,5 +15,5 @@ function ball(x, y, r, color) {
     ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
     ctx.stroke();
     ctx.fill();
-  }; 
+  };
 }
