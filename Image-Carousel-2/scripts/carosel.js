@@ -8,8 +8,8 @@ class Carousel {
     this.imageHeight = y;
     this.currentIndex = 0;
     this.dx = 0;
-    this.interval1;
-    this.interval2;
+    this.interval1 = 0;
+    this.interval2 = 0;
     this.dotWrapper = document.createElement("div");
     this.dots;
     this.dotIndicator;
@@ -35,7 +35,6 @@ class Carousel {
     this.dotCreator();
     this.media3();
     this.activeDot(this.currentIndex);
-
     this.automaticSlider();
   }
 
@@ -126,6 +125,69 @@ class Carousel {
     }
   };
 
+  dotWrapperLayout = () => {
+    this.dotWrapper.id = "dotWrapper";
+    this.dotWrapper.style.zIndex = "5";
+    this.dotWrapper.style.left =
+      this.imageWidth / 2 - (this.imageCount * 20) / 2 + "px";
+    this.dotWrapper.style.position = "absolute";
+    this.dotWrapper.style.top = this.imageHeight - 20 + "px";
+    this.container.append(this.dotWrapper);
+  };
+  media3 = () => {
+    if (this.phone.matches) {
+      this.dotWrapper.style.left =
+        this.imageWidth / 2 - (this.imageCount * 15) / 2 + "px";
+    }
+  };
+  dotCreator = () => {
+    for (let i = 0; i < this.imageCount; i++) {
+      this.dotIndicator = document.createElement("div");
+      this.dotIndicator.id = "dotIndicator";
+      this.dotIndicator.style.display = "inline-block";
+      this.dotIndicator.style.borderRadius = "50%";
+      this.dotIndicator.style.height = "15px";
+      this.dotIndicator.style.width = "15px";
+      this.dotIndicator.style.marginLeft = "5px";
+      this.dotIndicator.style.cursor = "pointer";
+      this.dotIndicator.style.backgroundColor = "red";
+      this.dotWrapper.append(this.dotIndicator);
+      if (this.phone.matches) {
+        this.dotIndicator.style.height = "10px";
+        this.dotIndicator.style.width = "10px";
+      }
+      this.dotIndicator.addEventListener("click", () => {
+        let currentDot = i;
+        let toBeChanged = this.currentIndex - currentDot;
+        if (toBeChanged > 0) {
+          for (let i = toBeChanged; i != 0; i--) {
+            this.prevImage();
+          }
+        } else if (toBeChanged < 0) {
+          for (let i = toBeChanged; i != 0; i++) {
+            this.nextImage();
+          }
+        }
+      });
+    }
+    this.dots = Array.from(this.dotWrapper.children);
+  };
+
+  activeDot(i) {
+    this.dots[i].style.backgroundColor = "white";
+    this.dots[i].style.border = "2px solid red";
+  }
+
+  nonActiveDot(i) {
+    this.dots[i].style.backgroundColor = "red";
+  }
+
+  automaticSlider = () => {
+    setInterval(() => {
+      this.prevImage();
+    }, this.holdTime);
+  };
+
   nextImage = () => {
     {
       clearInterval(this.automaticSlider());
@@ -191,68 +253,5 @@ class Carousel {
       this.currentIndex--;
     }
     this.activeDot(this.currentIndex);
-  };
-
-  dotWrapperLayout = () => {
-    this.dotWrapper.id = "dotWrapper";
-    this.dotWrapper.style.zIndex = "5";
-    this.dotWrapper.style.left =
-      this.imageWidth / 2 - (this.imageCount * 20) / 2 + "px";
-    this.dotWrapper.style.position = "absolute";
-    this.dotWrapper.style.top = this.imageHeight - 20 + "px";
-    this.container.append(this.dotWrapper);
-  };
-  media3 = () => {
-    if (this.phone.matches) {
-      this.dotWrapper.style.left =
-        this.imageWidth / 2 - (this.imageCount * 15) / 2 + "px";
-    }
-  };
-  dotCreator = () => {
-    for (let i = 0; i < this.imageCount; i++) {
-      this.dotIndicator = document.createElement("div");
-      this.dotIndicator.id = "dotIndicator";
-      this.dotIndicator.style.display = "inline-block";
-      this.dotIndicator.style.borderRadius = "50%";
-      this.dotIndicator.style.height = "15px";
-      this.dotIndicator.style.width = "15px";
-      this.dotIndicator.style.marginLeft = "5px";
-      this.dotIndicator.style.cursor = "pointer";
-      this.dotIndicator.style.backgroundColor = "red";
-      this.dotWrapper.append(this.dotIndicator);
-      if (this.phone.matches) {
-        this.dotIndicator.style.height = "10px";
-        this.dotIndicator.style.width = "10px";
-      }
-      this.dotIndicator.addEventListener("click", () => {
-        let currentDot = i;
-        let toBeChanged = this.currentIndex - currentDot;
-        if (toBeChanged > 0) {
-          for (let i = toBeChanged; i != 0; i--) {
-            this.prevImage();
-          }
-        } else if (toBeChanged < 0) {
-          for (let i = toBeChanged; i != 0; i++) {
-            this.nextImage();
-          }
-        }
-      });
-    }
-    this.dots = Array.from(this.dotWrapper.children);
-  };
-
-  activeDot(i) {
-    this.dots[i].style.backgroundColor = "white";
-    this.dots[i].style.border = "2px solid red";
-  }
-
-  nonActiveDot(i) {
-    this.dots[i].style.backgroundColor = "red";
-  }
-
-  automaticSlider = () => {
-    setInterval(() => {
-      this.nextImage();
-    }, this.holdTime);
   };
 }
