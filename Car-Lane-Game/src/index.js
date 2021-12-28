@@ -4,6 +4,7 @@ let myObstacle = [];
 let speed = 5;
 let obstaclePosition = [60, 220, 385];
 let score = 0;
+let index = 2;
 
 function startAnimation() {
   animationArea.start();
@@ -12,7 +13,6 @@ function startAnimation() {
   setInterval(() => {
     let randomIndex = Math.floor(Math.random() * obstaclePosition.length);
     myObstacle.push(new obstacle(speed, obstaclePosition[randomIndex]));
-    
   }, 2000);
 }
 
@@ -46,7 +46,7 @@ function updateAnimationArea() {
 }
 
 function handleClick(event) {
-  if (event.keyCode == "37") {
+  if (event.key === "37") {
     myCar.moveLeft();
     console.log("moved left");
   }
@@ -86,11 +86,25 @@ function gameOver() {
   popUp.id = "popUp";
   popUp.style.width = "50%";
   popUp.style.height = "300px";
-  popUp.style.backgroundColor = "yellow";
+  // popUp.style.backgroundColor = "yellow";
   popUp.style.position = "absolute";
   popUp.style.top = "100px";
   popUp.style.marginLeft = "24.5%";
-  
-
+  popUp.style.backgroundImage = "url('images/over.png')";
+  popUp.style.backgroundSize = "cover";
+  popUp.style.backgroundPosition = "center";
   animationArea.container.append(popUp);
+  const reLoad = document.createElement("div");
+  reLoad.style.position = "absolute";
+  reLoad.style.height = "50px";
+  reLoad.style.width = "100px";
+  reLoad.style.backgroundColor = "red";
+  reLoad.style.bottom = "0px";
+  reLoad.style.marginLeft = "300px";
+  reLoad.style.marginBottom = "30px";
+  reLoad.innerText = "Reload";
+  popUp.append(reLoad);
+  reLoad.onclick = function () {
+    window.location.reload();
+  };
 }
