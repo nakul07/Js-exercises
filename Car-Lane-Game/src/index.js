@@ -1,7 +1,7 @@
 let myCar;
 let laneBackground;
 let myObstacle = [];
-let speed = 3;
+let speed = 5;
 let obstaclePosition = [60, 220, 385];
 let score = 0;
 
@@ -12,18 +12,19 @@ function startAnimation() {
   setInterval(() => {
     let randomIndex = Math.floor(Math.random() * obstaclePosition.length);
     myObstacle.push(new obstacle(speed, obstaclePosition[randomIndex]));
-    scoreCalc(myObstacle);
+    
   }, 2000);
 }
 
 var animationArea = {
+  container: document.getElementById("canvas-container"),
   canvas: document.createElement("canvas"),
   start: function () {
     this.canvas.width = 700;
     this.canvas.height = 600;
     this.canvas.addEventListener("keydown", handleClick);
     this.context = this.canvas.getContext("2d");
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+    this.container.append(this.canvas);
     this.interval = setInterval(updateAnimationArea, 20);
   },
   clear: function () {
@@ -40,7 +41,7 @@ function updateAnimationArea() {
     obstacle.obstacleUpdate();
     collisionDetect(obstacle);
   });
-
+  scoreCalc();
   scoreDisplay();
 }
 
@@ -51,15 +52,16 @@ function handleClick(event) {
   }
 }
 
-function scoreCalc(obstacle) {
+//score calculator
+function scoreCalc() {
   setTimeout(function () {}, 2000);
-  for (let i = 0; i < obstacle.length; i++) {
-    if (obstacle[i].y > animationArea.canvas.height + 2) {
+  for (let i = 0; i < myCar.length; i++) {
+    if (myCar[i].y > animationArea.canvas.height + 2) {
       score++;
     }
   }
 }
-
+//display score
 function scoreDisplay() {
   animationArea.context.font = "50px Comic Sans MS";
   animationArea.context.fillText(score, 570, 100);
@@ -79,4 +81,16 @@ function collisionDetect(obstacle) {
 }
 function gameOver() {
   clearInterval(animationArea.interval);
+  animationArea.container.position = "relative";
+  const popUp = document.createElement("div");
+  popUp.id = "popUp";
+  popUp.style.width = "50%";
+  popUp.style.height = "300px";
+  popUp.style.backgroundColor = "yellow";
+  popUp.style.position = "absolute";
+  popUp.style.top = "100px";
+  popUp.style.marginLeft = "24.5%";
+  
+
+  animationArea.container.append(popUp);
 }
