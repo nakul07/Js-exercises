@@ -62,7 +62,6 @@ function background(speed) {
   this.height = animationArea.canvas.height;
   this.max = this.height;
   this.speed = speed;
-  this.speed = this.speed + 0.1;
   this.step = -(this.speed + 1);
   this.img = document.createElement("img");
   this.img.src = "images/lane.png";
@@ -71,6 +70,7 @@ function background(speed) {
     ctx.drawImage(this.img, 0, this.y, 500, 600);
     ctx.drawImage(this.img, 0, this.y - this.height, 500, 600);
     this.y -= this.step;
+
     if (this.y > this.max) {
       this.y = 0;
     }
@@ -105,9 +105,9 @@ function gameOver() {
   reLoad.style.borderRadius = "5px";
   reLoad.style.cursor = "pointer";
   popUp.append(reLoad);
-  const h1  = document.createElement("h1");
+  const h1 = document.createElement("h1");
   h1.id = "gameOver";
-  h1.innerText = "Game Over !!"
+  h1.innerText = "Game Over !!";
   h1.style.textAlign = "center";
   h1.style.fontSize = "60px";
   h1.style.marginTop = "50px";
