@@ -26,21 +26,21 @@ function bird() {
   this.gSpeed = 0;
   this.height = 35;
   this.width = 45;
-  // this.angle = 0;
-  // this.column1 = 5;
-  // this.row1 = 3;
-  // this.frameWidth = 820 / this.column;
-  // this.frameHeight = 507 / this.row;
-  // this.currentFrame = 0;
-  this.img1 = document.createElement("img");
-  // this.img2 = document.createElement("img");
-  // this.img3 = document.createElement("img");
-  this.img1.src = "images/bluebird-downflap.png";
-  // this.img2.src = "images/bluebird-midflap.png";
-  // this.img3.src = "images/bluebird-upflap.png";
+  this.imgIndex = 1;
+  this.images = [
+    "bluebird-downflap.png",
+    "bluebird-midflap.png",
+    "bluebird-upflap.png",
+  ];
+  this.img = document.createElement("img");
+  this.interval = setInterval(() => {
+    this.imgIndex = (this.imgIndex + 1) % 3;
+  }, 100);
+
   this.birdUpdate = function () {
     ctx = animationArea.context;
-    ctx.drawImage(this.img1, this.x, this.y, this.width, this.height);
+    this.img.src = `images/${this.images[this.imgIndex]}`;
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   };
 
   this.birdMove = function () {
