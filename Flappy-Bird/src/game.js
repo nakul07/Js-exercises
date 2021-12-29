@@ -1,4 +1,4 @@
-function obstacle(height,x,y) {
+function obstacle(height, x, y) {
   this.height = height;
   this.x = x;
   this.y = y;
@@ -9,15 +9,29 @@ function obstacle(height,x,y) {
   this.obstacleUpdate = function () {
     ctx = animationArea.context;
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    console.log("x="+this.x+"y="+this.y+"width="+this.width+"height ="+this.height);
-  };  
+    console.log(
+      "x=" +
+        this.x +
+        "y=" +
+        this.y +
+        "width=" +
+        this.width +
+        "height =" +
+        this.height
+    );
+  };
+  this.score = function () {
+    if (this.x < 0) {
+      score++; 
+    }
+  };
 }
 
 function bird() {
   this.y = 285;
   this.speedY = 1.1;
   this.index = 1;
-  this.x = 40;
+  this.x = 100;
   this.n = -0.4;
   this.gravity = 0.05;
   this.gSpeed = 0;
@@ -50,8 +64,10 @@ function bird() {
 
     if (this.y > bottom) {
       this.y = bottom - 1;
+      gameOver();
     } else if (this.y < 0) {
       this.y = 0;
+      gameOver();
     }
   };
 
@@ -72,7 +88,7 @@ function bird() {
       left > obstacleRight
     ) {
       collision = false;
-     //  console.log("voer");
+      //  console.log("voer");
       //gameOver();
     }
     return collision;
@@ -109,7 +125,7 @@ function background() {
 
 function gameOver() {
   if (score > highscore) {
-    localStorage.setItem("highscore", score);
+    localStorage.setItem("highscore1", score);
   }
 
   clearInterval(animationArea.interval);

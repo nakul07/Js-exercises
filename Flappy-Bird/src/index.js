@@ -9,8 +9,8 @@ function startAnimation() {
   animationArea.start();
   myBird = new bird();
   gBackground = new background();
-  if (localStorage.getItem("highscore") !== null) {
-    highscore = localStorage.getItem("highscore");
+  if (localStorage.getItem("highscore1") !== null) {
+    highscore = localStorage.getItem("highscore1");
   }
 }
 
@@ -36,7 +36,7 @@ let animationArea = {
 };
 
 function updateAnimationArea() {
-  let a, b;
+  let a, b, minH, maxH, height, minG, maxG, gap;
   for (i = 0; i < myObstacle.length; i++) {
     if (myBird.collisionDetect(myObstacle[i])) {
       gameOver();
@@ -45,19 +45,26 @@ function updateAnimationArea() {
   }
   animationArea.clear();
   animationArea.frame++;
-  if (animationArea.frame == 1 || eachInterval(150)) {
-    a = animationArea.canvas.width;
-    b = animationArea.canvas.height - 200;
-    myObstacle.push(new obstacle(200, a, b));
-  }
-  myObstacle.forEach((obstacle) => {
-    obstacle.x += -1;
-    obstacle.obstacleUpdate();
-   // console.log(obstacle);
-  });
-  gBackground.speedX = -1;
+  gBackground.speedX = -0.3;
   gBackground.bgLoop();
   gBackground.print();
+  if (animationArea.frame == 1 || eachInterval(250)) {
+    a = animationArea.canvas.width;
+    minH = 80;
+    maxH = 300;
+    height = Math.floor(Math.random() * (maxH - minH + 1) + minH);
+    minG = 100;
+    maxG = 200;
+    gap = Math.floor(Math.random() * (maxG - minG + 1) + minG);
+    myObstacle.push(new obstacle(height, a, -2));
+    myObstacle.push(new obstacle((a - height - gap), a, height+gap));
+  }
+  myObstacle.forEach((obstacle) => {
+    obstacle.x += -1.5;
+    obstacle.obstacleUpdate();
+    obstacle.score();
+  });
+
   myBird.birdMove();
   myBird.birdUpdate();
   scoreDisplay(860, 40);
@@ -84,15 +91,3 @@ function hScoreDisplay(x, y) {
   animationArea.context.font = "25px Comic Sans MS";
   animationArea.context.fillText("High Score: " + highscore, x, y);
 }
-
-// function collisionDetect(obstacle) {
-//   if (
-//     obstacle.x + 60 > myBird.x + 45 &&
-//     obstacle.y + 35 < myBird.y + 200 &&
-//     obstacle.x + 45 < myBird.x + 60 &&
-//     200 + obstacle.y > myBird.y + 35
-//   ) {
-//     // gameOver();
-//     console.log("overrrrrrrrrr");
-//   }
-// }
