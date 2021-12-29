@@ -46,11 +46,6 @@ function bird() {
   this.birdUpdate = function () {
     ctx = animationArea.context;
     ctx.drawImage(this.img1, this.x, this.y, this.width, this.height);
-    // setInterval(() => {
-    //   ctx.drawImage(this.img1, this.x, this.y, 45, 35);
-    //   ctx.drawImage(this.img2, this.x, this.y, 45, 35);
-    //   ctx.drawImage(this.img3, this.x, this.y, 45, 35);
-    // }, 1000);
   };
 
   this.birdMove = function () {

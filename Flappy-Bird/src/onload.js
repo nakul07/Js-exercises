@@ -1,9 +1,11 @@
 function onLoad() {
   const initialScreen = document.createElement("div");
   initialScreen.id = "initialScreen";
-  initialScreen.style.height = window.screen.height + "px";
+  initialScreen.style.height = "700px";
   initialScreen.style.width = "100%";
-  initialScreen.style.backgroundImage = "url('images/walpaper.jpg')";
+  initialScreen.style.backgroundImage = "url('images/background.jpg')";
+  initialScreen.style.backgroundRepeat = "no-repeat";
+  initialScreen.style.backgroundSize = "cover";
   document.body.append(initialScreen);
   const instructionWrapper = document.createElement("div");
   instructionWrapper.id = "instructionWrapper";
@@ -17,19 +19,20 @@ function onLoad() {
   instructionWrapper.style.left = "25%";
   const instructions = document.createElement("h1");
   instructions.style.textAlign = "center";
+  instructions.style.color = "green"
   instructions.innerText =
-    "Use Arrow Left and Arrow Right keys to control the car and Enjoy !!";
+    "Press Space Bar to flap the bird and avoid the Obstacles ";
   instructionWrapper.append(instructions);
   initialScreen.append(instructionWrapper);
   const startGame = document.createElement("div");
   startGame.id = "startGame";
-  startGame.style.height = "70px";
-  startGame.style.width = "220px";
-  startGame.style.backgroundImage = "url('images/start.png')";
+  startGame.style.height = "250px";
+  startGame.style.width = "200px";
+  startGame.style.backgroundImage = "url('images/message.png')";
   startGame.style.backgroundSize = "cover";
   startGame.style.backgroundRepeat = "no-repeat";
   startGame.style.position = "absolute";
-  startGame.style.marginTop = "100px";
+  startGame.style.marginTop = "30px";
   startGame.style.left = "34%";
   startGame.style.cursor = "pointer";
   instructionWrapper.append(startGame);
