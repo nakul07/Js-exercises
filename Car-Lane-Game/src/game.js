@@ -16,8 +16,8 @@ function obstacle(speed, y) {
     if (this.y >= animationArea.canvas.height) {
       this.reset();
       score++;
-      this.speed = this.speed + 0.3;
-      // console.log(this.speed);
+      this.speed = this.speed + 0.2;
+      console.log(this.speed);
     }
   };
 
@@ -30,6 +30,7 @@ function obstacle(speed, y) {
     this.index = RandomIndex();
     this.x = obstaclePosition[this.index];
   };
+  //console.log(this.speed);
 }
 
 function car() {
