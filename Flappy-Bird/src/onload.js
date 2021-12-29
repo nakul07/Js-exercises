@@ -1,4 +1,7 @@
+//initial screen setting up
+let swoosh; //sound
 function onLoad() {
+  swoosh = new sound("audio/swoosh.wav");
   const initialScreen = document.createElement("div");
   initialScreen.id = "initialScreen";
   initialScreen.style.height = "700px";
@@ -19,24 +22,27 @@ function onLoad() {
   instructionWrapper.style.left = "25%";
   const instructions = document.createElement("h1");
   instructions.style.textAlign = "center";
-  instructions.style.color = "green"
+  instructions.style.color = "green";
   instructions.innerText =
-    "Press Space Bar to flap the bird and avoid the Obstacles ";
+    "Press Space Bar to flap the bird and avoid the Obstacles "; //instructions
   instructionWrapper.append(instructions);
   initialScreen.append(instructionWrapper);
   const startGame = document.createElement("div");
   startGame.id = "startGame";
-  startGame.style.height = "250px";
-  startGame.style.width = "200px";
+  startGame.style.height = "300px";
+  startGame.style.width = "210px";
   startGame.style.backgroundImage = "url('images/message.png')";
   startGame.style.backgroundSize = "cover";
   startGame.style.backgroundRepeat = "no-repeat";
   startGame.style.position = "absolute";
-  startGame.style.marginTop = "30px";
+  startGame.style.marginTop = "19px";
   startGame.style.left = "34%";
   startGame.style.cursor = "pointer";
   instructionWrapper.append(startGame);
+
+  //click event on start game
   startGame.addEventListener("mousedown", (Event) => {
+    swoosh.play();
     startAnimation();
     initialScreen.style.display = "none";
   });
