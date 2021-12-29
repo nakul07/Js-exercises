@@ -9,20 +9,10 @@ function obstacle(height, x, y) {
   this.obstacleUpdate = function () {
     ctx = animationArea.context;
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    console.log(
-      "x=" +
-        this.x +
-        "y=" +
-        this.y +
-        "width=" +
-        this.width +
-        "height =" +
-        this.height
-    );
   };
   this.score = function () {
     if (this.x < 0) {
-      score++; 
+      score++;
     }
   };
 }
@@ -30,19 +20,24 @@ function obstacle(height, x, y) {
 function bird() {
   this.y = 285;
   this.speedY = 1.1;
-  this.index = 1;
   this.x = 100;
   this.n = -0.4;
   this.gravity = 0.05;
   this.gSpeed = 0;
   this.height = 35;
   this.width = 45;
+  // this.angle = 0;
+  // this.column1 = 5;
+  // this.row1 = 3;
+  // this.frameWidth = 820 / this.column;
+  // this.frameHeight = 507 / this.row;
+  // this.currentFrame = 0;
   this.img1 = document.createElement("img");
-  this.img2 = document.createElement("img");
-  this.img3 = document.createElement("img");
+  // this.img2 = document.createElement("img");
+  // this.img3 = document.createElement("img");
   this.img1.src = "images/bluebird-downflap.png";
-  this.img2.src = "images/bluebird-midflap.png";
-  this.img3.src = "images/bluebird-upflap.png";
+  // this.img2.src = "images/bluebird-midflap.png";
+  // this.img3.src = "images/bluebird-upflap.png";
   this.birdUpdate = function () {
     ctx = animationArea.context;
     ctx.drawImage(this.img1, this.x, this.y, this.width, this.height);
@@ -51,6 +46,7 @@ function bird() {
   this.birdMove = function () {
     this.gSpeed += this.gravity;
     this.y += this.speedY + this.gSpeed;
+    // ctx.rotate((1 * Math.PI) / 180);
     this.hitBox();
   };
 
@@ -122,7 +118,6 @@ function gameOver() {
   if (score > highscore) {
     localStorage.setItem("highscore1", score);
   }
-
   clearInterval(animationArea.interval);
   animationArea.container.position = "relative";
   const popUp = document.createElement("div");
@@ -147,14 +142,14 @@ function gameOver() {
   reLoad.style.borderRadius = "5px";
   reLoad.style.cursor = "pointer";
   popUp.append(reLoad);
-  const h1 = document.createElement("h1");
-  h1.id = "gameOver";
-  h1.innerText = "Game Over !!";
-  h1.style.textAlign = "center";
-  h1.style.fontSize = "60px";
-  h1.style.marginTop = "50px";
-  h1.style.fontWeight = "600";
-  h1.style.color = "red";
+  const h1 = document.createElement("div");
+  h1.style.backgroundImage = "url('images/gameover.png')";
+  h1.style.height = "200px";
+  h1.style.width = "100px;";
+  //h1.style.position = "absolute";
+  h1.style.backgroundPosition = "center";
+  h1.style.backgroundRepeat = "no-repeat";
+  h1.style.top = "50px";
   popUp.append(h1);
   const h3 = document.createElement("h3");
   h3.id = "reloadTxt";
@@ -162,6 +157,12 @@ function gameOver() {
 
   reLoad.append(h3);
   reLoad.onclick = function () {
-    window.location.reload();
+    // window.location.reload();
+    popUp.style.display = "none";
+
+    for (let i = 0; i < myObstacle.length + 1; i++) {
+      destruct(i);
+    }
+    startAnimation();
   };
 }

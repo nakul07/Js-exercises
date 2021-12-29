@@ -57,7 +57,7 @@ function updateAnimationArea() {
     maxG = 200;
     gap = Math.floor(Math.random() * (maxG - minG + 1) + minG);
     myObstacle.push(new obstacle(height, a, -2));
-    myObstacle.push(new obstacle((a - height - gap), a, height+gap));
+    myObstacle.push(new obstacle(a - height - gap, a, height + gap));
   }
   myObstacle.forEach((obstacle) => {
     obstacle.x += -1.5;
@@ -67,6 +67,7 @@ function updateAnimationArea() {
 
   myBird.birdMove();
   myBird.birdUpdate();
+  //myBall.angle += (1 * Math.PI) / 180;
   scoreDisplay(860, 40);
   hScoreDisplay(30, 40);
 }

@@ -11,3 +11,9 @@ function eachInterval(n) {
   }
   return false;
 }
+const destruct = (obstacle) => {
+  const updatedObstacles = myObstacle.filter(
+    (items, index) => obstacle == index
+  );
+  myObstacle = updatedObstacles;
+};
